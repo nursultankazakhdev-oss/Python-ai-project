@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple JSON AI</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background: #f4f4f9; }
+        .chat-container { width: 400px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        #chat-log { height: 300px; border: 1px solid #ddd; overflow-y: auto; margin-bottom: 10px; padding: 10px; display: flex; flex-direction: column; }
+        .msg { margin: 5px 0; padding: 8px; border-radius: 5px; max-width: 80%; }
+        .user { background: #e3f2fd; align-self: flex-end; }
+        .ai { background: #f1f1f1; align-self: flex-start; }
+        input { width: calc(100% - 22px); padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
 
+<div class="chat-container">
+    <h3>Mini AI Bot</h3>
+    <div id="chat-log"></div>
+    <input type="text" id="user-input" placeholder="Say 'hello' or 'help'..." onkeypress="handleChat(event)">
+</div>
+
+<script>
+    // This is your "JSON" data stored as a JS Object
+    const brain = {
+        "hello": "Hi there! How can I help you today?",
+        "hi": "Hello! Nice to meet you.",
+        "help": "I can answer simple questions. Try asking 'who made you' or 'weather'.",
+        "who made you": "I was created by a human using HTML, CSS, and JS!",
+        "weather": "I'm stuck inside this browser, so I can't see the sky, but it looks digital!",
+        "bye": "Goodbye! Have a great day.",
+        "default": "I'm not sure I understand that. Try saying 'help'."
+    };
+
+    function handleChat(e) {
+        if (e.key === 'Enter') {
+            const inputField = document.getElementById('user-input');
+            const message = inputField.value.toLowerCase().trim();
+            
+            if (message === "") return;
+
+            addMessage(message, 'user');
+            inputField.value = '';
+
+            // AI Logic: Find match in "brain" or use default
+            setTimeout(() => {
+                const response = brain[message] || brain["default"];
+                addMessage(response, 'ai');
+            }, 500);
+        }
+    }
+
+    function addMessage(text, sender) {
+        const log = document.getElementById('chat-log');
+        const div = document.createElement('div');
+        div.className = `msg ${sender}`;
+        div.innerText = text;
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight; // Auto-scroll
+    }
+</script>
+
+</body>
+</html>
