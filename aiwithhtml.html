@@ -24,14 +24,37 @@
 
 <script>
     // This is your "JSON" data stored as a JS Object
-    const brain = {
-        "hello": "Hi there! How can I help you today?",
-        "hi": "Hello! Nice to meet you.",
-        "help": "I can answer simple questions. Try asking 'who made you' or 'weather'.",
-        "who made you": "I was created by a human using HTML, CSS, and JS!",
-        "weather": "I'm stuck inside this browser, so I can't see the sky, but it looks digital!",
-        "bye": "Goodbye! Have a great day.",
-        "default": "I'm not sure I understand that. Try saying 'help'."
+   const brain = {
+        "hello": "Greetings! I am your local AI. How can I assist your coding today?",
+        "hi": "Hello! Ready to write some code?",
+        "hey": "Hey there! What's on your mind?",
+        
+        // PYTHON SECTION
+        "python hello world": "print('Hello, World!')",
+        "python loop": "for i in range(10):\n    print(f'Iteration: {i}')",
+        "python list": "my_list = [1, 2, 3]\nmy_list.append(4)\nprint(my_list)  # Output: [1, 2, 3, 4]",
+        "python def": "def my_function(name):\n    return f'Hello {name}'\n\nprint(my_function('User'))",
+        "python dictionary": "data = {'name': 'AI', 'type': 'JSON'}\nprint(data['name'])",
+        "python if": "if x > 10:\n    print('Big')\nelse:\n    print('Small')",
+        "python math": "import math\nprint(math.sqrt(16)) # Output: 4.0",
+        "python requests": "import requests\nr = requests.get('https://google.com')\nprint(r.status_code)",
+
+        // WEB DEV SECTION
+        "css flexbox": "display: flex;\njustify-content: center;\nalign-items: center;",
+        "html template": "<!DOCTYPE html>\n<html>\n<head><title>Title</title></head>\n<body>\n</body>\n</html>",
+        "js console": "console.log('Debugging like a pro!');",
+        "css center div": "div {\n  display: grid;\n  place-items: center;\n}",
+
+        // KNOWLEDGE SECTION
+        "who are you": "I am a JSON-based AI logic gate built for GitHub Pages.",
+        "what is json": "JSON stands for JavaScript Object Notation. It's a way to store data in key-value pairs.",
+        "sky color": "The sky is blue because of Rayleigh scattering!",
+        "meaning of life": "42. (And maybe good code.)",
+        "github pages": "GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files directly from a repository.",
+
+        // HELP & DEFAULT
+        "help": "You can ask for: 'python hello world', 'css flexbox', 'what is json', or 'python requests'.",
+        "default": "I haven't learned that specific command yet. You can add it to my 'brain' in the code! Try asking for 'help'."
     };
 
     function handleChat(e) {
