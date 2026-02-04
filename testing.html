@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Smart Loader</title>
-  <style>
-    html, body, iframe {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border: none;
+  <title>Auto Loader</title>
+  <script>
+    const ONLINE_URL = "https://cantoris-familyish-margot.ngrok-free.dev";
+    const OFFLINE_URL = "https://nursultankazakhdev-oss.github.io/Python-ai-project/offline.html";
+    const CHECK_INTERVAL = 5000; // ms
+
+    async function checkServer() {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 3000);
+
+        await fetch(ONLINE_URL, {
+          method: "HEAD",
+          mode: "no-cors",
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+
+        // If online, redirect
+        if (window.location.href !== ONLINE_URL) {
+          window.location.href = ONLINE_URL;
+        }
+      } catch (e) {
+        // If offline, redirect to offline page
+        if (window.location.href !== OFFLINE_URL) {
+          window.location.href = OFFLINE_URL;
+        }
+      }
     }
-  </style>
+
+    checkServer();
+    setInterval(checkServer, CHECK_INTERVAL);
+  </script>
 </head>
 <body>
-
-<iframe id="viewer"></iframe>
-
-<script>
-  const ONLINE_URL = "https://cantoris-familyish-margot.ngrok-free.dev";
-  const OFFLINE_URL = "https://nursultankazakhdev-oss.github.io/Python-ai-project/offline.html";
-
-  async function loadPage() {
-    try {
-      await fetch(ONLINE_URL, { method: "HEAD", mode: "no-cors" });
-      document.getElementById("viewer").src = ONLINE_URL;
-    } catch {
-      document.getElementById("viewer").src = OFFLINE_URL;
-    }
-  }
-
-  loadPage();
-  setInterval(loadPage, 5000);
-</script>
-
+  <p>Checking server status…</p>
 </body>
 </html>
